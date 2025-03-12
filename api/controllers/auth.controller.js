@@ -65,6 +65,7 @@ export const login = async (req, res) => {
     res.status(500).json({message: 'Failed to login user!'});
   }
 };
+
 export const logout = (req, res) => {
   // logout controller
   res
