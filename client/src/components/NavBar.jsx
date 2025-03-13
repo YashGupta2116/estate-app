@@ -1,64 +1,54 @@
 import React from 'react';
-import {Navigate, Link} from 'react-router-dom';
-import HomePage from '../pages/HomePage';
+import {NavLink, Link} from 'react-router-dom';
+
+const navItems = [
+  {name: 'Home', path: '/'},
+  {name: 'About', path: '/about'},
+  {name: 'Contact', path: '/contact'},
+  {name: 'Agents', path: '/agents'},
+];
 
 const NavBar = () => {
   return (
-    <nav className='max-w-[85rem] mx-auto h-20 flex items-center justify-between px-8'>
-      {/* Left Side - Logo */}
-      <div className='font-extrabold text-2xl'>
-        <Link to='/'>Estate Store</Link>
+    <nav className='max-w-[80vw] mx-auto h-16 flex items-center justify-between py-4 px-6 md:px-12'>
+      {/* Logo */}
+      <div className='text-2xl font-bold text-gray-900'>
+        <Link to='/'>EstateScape</Link>
       </div>
 
-      {/* Center - Navigation Links */}
-      <div className='flex gap-12'>
-        <div>
-          <Link
-            to='/'
-            className='font-semibold text-lg !text-black cursor-pointer hover:!text-gray-600'
+      {/* Navigation */}
+      <div className='hidden md:flex gap-8'>
+        {navItems.map((item, index) => (
+          <NavLink
+            key={index}
+            to={item.path}
+            className={({isActive}) =>
+              `font-medium transition-all duration-300 ${
+                isActive
+                  ? 'text-black font-semibold'
+                  : 'text-gray-600 hover:text-black'
+              }`
+            }
           >
-            Home
-          </Link>
-        </div>
-        <div>
-          <Link
-            to='/about'
-            className='font-semibold text-lg !text-black cursor-pointer hover:!text-gray-600'
-          >
-            About
-          </Link>
-        </div>
-        <div>
-          <Link
-            to='/contact'
-            className='font-semibold text-lg !text-black cursor-pointer hover:!text-gray-600'
-          >
-            Contact
-          </Link>
-        </div>
-        <div>
-          <Link
-            to='/agents'
-            className='font-semibold text-lg !text-black cursor-pointer hover:!text-gray-600'
-          >
-            Agents
-          </Link>
-        </div>
+            {item.name}
+          </NavLink>
+        ))}
       </div>
 
-      {/* Right Side - Auth Buttons */}
-      <div className='flex gap-5'>
-        <button>
-          <Link
-            to='/signin'
-            className='!text-black font-bold hover:!text-gray-700'
-          >
-            Sign in
-          </Link>
-        </button>
-        <button className='bg-yellow-400 text-white px-5 py-2 rounded-md font-semibold  hover:bg-white hover:outline-2 hover:outline-yellow-400'>
-          <Link to='/signup'>Sign Up</Link>
-        </button>
+      {/* Auth Buttons */}
+      <div className='hidden md:flex gap-4'>
+        <Link
+          to='/signin'
+          className='text-gray-600 font-medium mt-2 hover:text-black transition-all'
+        >
+          Sign in
+        </Link>
+        <Link
+          to='/signup'
+          className='bg-yellow-500 text-white px-4 py-2 rounded-md font-medium hover:bg-yellow-600 transition-all'
+        >
+          Sign up
+        </Link>
       </div>
     </nav>
   );
